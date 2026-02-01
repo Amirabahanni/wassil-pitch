@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wassil - Commerce Operations for Morocco</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1A1A2E;
+            background: #FFFFFF;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #113170;
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            color: #1A1A2E;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #FF6B35;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #010e17 0%, #1A6B9E 100%);
+            color: white;
+            padding: 120px 20px 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 48px;
+            opacity: 0.95;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 700px;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 800;
+            color: #FF6B35;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #0A4B78;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #6C757D;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .bg-light {
+            background: #F8F9FA;
+        }
+
+        .problem-grid, .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #0A4B78;
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .card li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #FF6B35;
+            font-weight: bold;
+        }
+
+        .benchmark-table {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .benchmark-table th {
+            background: #0A4B78;
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .benchmark-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .benchmark-table tr:nth-child(even) {
+            background: #F8F9FA;
+        }
+
+        .wassil-col {
+            background: #E8F5E9 !important;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: #FF6B35;
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 900px;
+        }
+
+        .highlight-box h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #FF6B35;
+            transform: scale(1.05);
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #0A4B78;
+            margin: 16px 0;
+        }
+
+        .closing {
+            background: linear-gradient(135deg, #0A4B78 0%, #1A6B9E 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .closing h2 {
+            font-size: 42px;
+            margin-bottom: 24px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #FF6B35;
+            color: white;
+            padding: 16px 48px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 32px;
+        }
+
+        .cta-button:hover {
+            background: #FF8554;
+        }
+
+        footer {
+            background: #1A1A2E;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 32px; }
+            .hero-stats { grid-template-columns: 1fr; }
+            .section-title { font-size: 32px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">WASSIL</div>
+            <div class="nav-links">
+                <a href="#problem">Problem</a>
+                <a href="#solution">Solution</a>
+                <a href="#benchmark">Benchmark</a>
+                <a href="#market">Market</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Commerce Operations for Morocco's Real Business Reality</h1>
+            <p class="hero-subtitle">The first Moroccan platform that manages commerce the way businesses actually operate: through WhatsApp, Instagram, phone calls, and offline orders.</p>
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-number">78%</div>
+                    <div class="stat-label">of orders via social</div>
+                </div>
+                <div>
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">cash on delivery</div>
+                </div>
+                <div>
+                    <div class="stat-number">450K+</div>
+                    <div class="stat-label">Moroccan businesses</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">The Hidden Commerce Chaos</h2>
+            <p class="section-subtitle">Most Moroccan Businesses Don't Sell Through Websites</p>
+            
+            <div class="problem-grid">
+                <div class="card">
+                    <h3>Current Reality</h3>
+                    <ul>
+                        <li>78% of Moroccan commerce happens via WhatsApp & Instagram</li>
+                        <li>Business owners manually juggle multiple channels</li>
+                        <li>Lost orders, inventory errors, delivery mix-ups</li>
+                        <li>COD is 85%+ of transactions</li>
+                        <li>Hours spent on repetitive customer questions</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>With Wassil</h3>
+                    <ul>
+                        <li>✅ Unified dashboard for all channels</li>
+                        <li>✅ Real-time inventory sync</li>
+                        <li>✅ Automated COD tracking</li>
+                        <li>✅ AI handles repetitive questions</li>
+                        <li>✅ 75% time saved on operations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="background: #0A4B78; margin-top: 40px;">
+                <p style="font-size: 20px; line-height: 1.6;">
+                    <strong>A Day in the Life:</strong> A clothing boutique owner in Casablanca receives 50 orders/day. 
+                    She manually writes each one down, checks inventory by memory, calls delivery companies individually, 
+                    and tracks COD payments on paper. <br><br>
+                    <strong style="color: #FF6B35;">This is not a website problem. This is an operations problem.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alternatives Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Existing Solutions Miss the Mark</h2>
+            <p class="section-subtitle">Built for website-first selling, not Moroccan business reality</p>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card">
+                    <h3>The Mismatch</h3>
+                    <ul>
+                        <li>❌ Assume structured online shopping behavior</li>
+                        <li>❌ Don't capture WhatsApp/Instagram/offline orders natively</li>
+                        <li>❌ COD workflows are clunky add-ons</li>
+                        <li>❌ No unified view across 5+ channels</li>
+                        <li>❌ Force businesses to change how they operate</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benchmark Section -->
+    <section id="benchmark" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Detailed Competitive Benchmark</h2>
+            <p class="section-subtitle">How Wassil compares to current solutions</p>
+            
+            <div style="overflow-x: auto;">
+                <table class="benchmark-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 200px;">Feature</th>
+                            <th>Wassil</th>
+                            <th>YouCan</th>
+                            <th>Shopify</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">CORE PHILOSOPHY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary Focus</strong></td>
+                            <td class="wassil-col">Operations-first, multi-channel</td>
+                            <td>Website-first store</td>
+                            <td>Global e-commerce</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">ORDER MANAGEMENT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary Order Source</strong></td>
+                            <td class="wassil-col">WhatsApp, Instagram, offline, phone, website</td>
+                            <td>Website checkout</td>
+                            <td>Website checkout</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Manual Order Entry</strong></td>
+                            <td class="wassil-col">Native fast-entry flow</td>
+                            <td>Clunky admin workaround</td>
+                            <td>Clunky admin workaround</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Channel Sync</strong></td>
+                            <td class="wassil-col">Real-time across ALL sources</td>
+                            <td>Website-only</td>
+                            <td>Website-only</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">PAYMENT & COD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>COD Workflow</strong></td>
+                            <td class="wassil-col">Native tracking + reconciliation</td>
+                            <td>Basic COD flag</td>
+                            <td>Basic COD flag</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Morocco Payments</strong></td>
+                            <td class="wassil-col">COD, CMI, mobile wallets (native)</td>
+                            <td>CMI integration</td>
+                            <td>Requires setup</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Delivery → Payment Sync</strong></td>
+                            <td class="wassil-col">Auto-updates</td>
+                            <td>Manual</td>
+                            <td>Manual</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">DELIVERY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Morocco Logistics</strong></td>
+                            <td class="wassil-col">Amana, CTM, Jumia (direct)</td>
+                            <td>Limited</td>
+                            <td>None (Morocco)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">AI & AUTOMATION</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WhatsApp AI Agent</strong></td>
+                            <td class="wassil-col">Darija/French</td>
+                            <td>None</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instagram AI Agent</strong></td>
+                            <td class="wassil-col">Yes</td>
+                            <td>None</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Time Saved</strong></td>
+                            <td class="wassil-col">75% reduction</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">USER EXPERIENCE</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Setup Time</strong></td>
+                            <td class="wassil-col">10 minutes</td>
+                            <td>1-2 hours</td>
+                            <td>2-4 hours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical Skill</strong></td>
+                            <td class="wassil-col">None required</td>
+                            <td>Low</td>
+                            <td>Low-Medium</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Language Support</strong></td>
+                            <td class="wassil-col">Darija, French, English</td>
+                            <td>French, English</td>
+                            <td>20+ (not Darija)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h3>Key Insight</h3>
+                <p style="font-size: 18px;">YouCan and Shopify optimize for <strong>selling through websites</strong>. Wassil optimizes for <strong>managing commerce operations</strong> regardless of where the sale happens.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section">
+        <div class="container">
+            <h2 class="section-title">Introducing Wassil</h2>
+            <p class="section-subtitle">The commerce operations platform built for how Moroccan businesses actually work</p>
+            
+            <div class="features-grid">
+                <div class="card">
+                    <h3>📋 Unified Order Dashboard</h3>
+                    <ul>
+                        <li>Manually enter orders from any channel</li>
+                        <li>Auto-sync from optional website</li>
+                        <li>All orders in one place</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>📦 Smart Inventory</h3>
+                    <ul>
+                        <li>Track stock across all channels</li>
+                        <li>Automatic deduction</li>
+                        <li>Low-stock alerts</li>
+                        <li>Multi-location support</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>💰 Moroccan Payments</h3>
+                    <ul>
+                        <li>COD tracking native</li>
+                        <li>Collection confirmation</li>
+                        <li>CMI, bank transfers</li>
+                        <li>Cash flow visibility</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🚚 Integrated Delivery</h3>
+                    <ul>
+                        <li>Amana, CTM, Jumia direct</li>
+                        <li>Bulk shipment creation</li>
+                        <li>Status tracking</li>
+                        <li>Auto-update payments</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🌐 Optional Website</h3>
+                    <ul>
+                        <li>Simple mobile-first store</li>
+                        <li>Auto-syncs with dashboard</li>
+                        <li>For businesses ready online</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #FFE8D9 0%, #FFF3E0 100%); border: 2px solid #FF6B35;">
+                    <h3>🤖 AI Assistance</h3>
+                    <ul>
+                        <li>WhatsApp AI in Darija/French</li>
+                        <li>Instagram AI for DMs</li>
+                        <li>60% workload reduction</li>
+                        <li>Captures orders automatically</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="background: #0A4B78; margin-top: 60px;">
+                <p style="font-size: 20px;"><strong>Core Philosophy:</strong> Wassil doesn't force businesses to change how they operate. It adapts to them.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Wassil Wins -->
+    <section class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Why Wassil Wins</h2>
+            
+            <div class="features-grid">
+                <div class="card">
+                    <h3>1. Morocco-First</h3>
+                    <p>Built around Moroccan payment methods, logistics partners, and business behavior. Not a translation of a Western platform.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Operations-Centric</h3>
+                    <p>The dashboard is the product; the website is optional. Business owners get value on day one.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Multi-Channel Native</h3>
+                    <p>WhatsApp, Instagram, offline orders are first-class citizens, not afterthoughts.</p>
+                </div>
+                <div class="card">
+                    <h3>4. AI in Darija</h3>
+                    <p>AI agents trained on Moroccan Arabic/French interactions. Understands local phrasing and negotiation.</p>
+                </div>
+                <div class="card">
+                    <h3>5. Non-Technical</h3>
+                    <p>No coding, no complex setup. Staff learn order entry in 10 minutes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market -->
+    <section id="market" class="section">
+        <div class="container">
+            <h2 class="section-title">Market Opportunity</h2>
+            <p class="section-subtitle">Morocco first, scalable regionally</p>
+            
+            <div class="hero-stats" style="max-width: 900px; margin: 0 auto 60px;">
+                <div style="text-align: center;">
+                    <div class="stat-number" style="color: #0A4B78;">450K+</div>
+                    <div class="stat-label" style="color: #6C757D;">Active small businesses</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="stat-number" style="color: #0A4B78;">85%</div>
+                    <div class="stat-label" style="color: #6C757D;">E-commerce via social & COD</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="stat-number" style="color: #0A4B78;">50K</div>
+                    <div class="stat-label" style="color: #6C757D;">Initial addressable market</div>
+                </div>
+            </div>
+
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <h3>Target Segments (Phase 1)</h3>
+                <p style="margin: 20px 0;">👗 Fashion & Accessories • 💄 Cosmetics & Beauty • 📱 Electronics Resellers • 🍰 Food & Delivery • 🏠 Home Goods</p>
+                
+                <h3 style="margin-top: 30px;">Expansion Potential</h3>
+                <ul>
+                    <li><strong>Morocco:</strong> Year 1 – Foundation & proof of concept</li>
+                    <li><strong>North Africa:</strong> Tunisia, Algeria, Egypt – Similar commerce behaviors</li>
+                    <li><strong>West Africa:</strong> Francophone markets with comparable infrastructure</li>
+                    <li><strong>Emerging Markets:</strong> Global markets with similar pain points</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Sustainable SaaS Revenue</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">MAD 0<span style="font-size: 16px;">/mo</span></div>
+                    <ul style="text-align: left; margin-top: 20px;">
+                        <li>25 orders/month</li>
+                        <li>Basic inventory</li>
+                        <li>1 user</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <div style="background: #FF6B35; color: white; padding: 8px; margin: -32px -32px 20px; border-radius: 12px 12px 0 0;">Most Popular</div>
+                    <h3>Starter</h3>
+                    <div class="price">MAD 199<span style="font-size: 16px;">/mo</span></div>
+                    <ul style="text-align: left; margin-top: 20px;">
+                        <li>200 orders/month</li>
+                        <li>Full inventory</li>
+                        <li>Website builder</li>
+                        <li>WhatsApp AI (limited)</li>
+                        <li>2 users</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3>Professional</h3>
+                    <div class="price">MAD 499<span style="font-size: 16px;">/mo</span></div>
+                    <ul style="text-align: left; margin-top: 20px;">
+                        <li>Unlimited orders</li>
+                        <li>Advanced analytics</li>
+                        <li>Full AI agents</li>
+                        <li>Multi-location</li>
+                        <li>5 users</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">Custom</div>
+                    <ul style="text-align: left; margin-top: 20px;">
+                        <li>Dedicated support</li>
+                        <li>Custom integrations</li>
+                        <li>API access</li>
+                        <li>White-label options</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Now -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Why Now</h2>
+            <p class="section-subtitle">The perfect storm for Wassil</p>
+            
+            <div class="features-grid">
+                <div class="card">
+                    <h3>📱 Digital Acceleration</h3>
+                    <p>Post-COVID: WhatsApp/Instagram commerce exploded, but infrastructure didn't catch up</p>
+                </div>
+                <div class="card">
+                    <h3>💬 Social Commerce</h3>
+                    <p>Customers comfortable buying via DMs, businesses stuck with wrong tools</p>
+                </div>
+                <div class="card">
+                    <h3>🚚 Delivery Infrastructure</h3>
+                    <p>Amana, Jumia Logistics, CTM expanding—integration opportunities now available</p>
+                </div>
+                <div class="card">
+                    <h3>📲 Mobile-First Morocco</h3>
+                    <p>25M+ smartphone users, 80%+ mobile internet penetration</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 Startup Ecosystem</h3>
+                    <p>Investors interested, success stories proving market viability, talent pool growing</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 60px;">
+                <p style="font-size: 20px;"><strong>The Window:</strong> Businesses are ready, infrastructure exists, but no one has built the right product yet. <strong>Wassil is that product.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing">
+        <div class="container">
+            <h2>We don't just help businesses sell online.</h2>
+            <h2 style="color: #FF6B35;">We help them run better.</h2>
+            
+            <p style="font-size: 22px; font-style: italic; margin: 40px auto; max-width: 800px;">
+                "Most platforms ask Moroccan businesses to change. <strong>Wassil changes to fit Moroccan businesses.</strong>"
+            </p>
+
+            <h3 style="font-size: 32px; margin-top: 60px;">Let's Build the Future of Moroccan Commerce</h3>
+            <a href="mailto:contact@wassil.ma" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px; color: #FF6B35;">WASSIL</div>
+            <p>Commerce operations for Morocco's real business reality</p>
+            <p style="margin-top: 16px;"><a href="mailto:amirabahanni@gmail.com" style="color: white; text-decoration: none;">amirabahanni@gmail.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>
