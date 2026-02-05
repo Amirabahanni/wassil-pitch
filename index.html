@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wassil - Commerce Operations for Morocco</title>
+    <title>Wassil - Commerce Operations Platform for Moroccan MSMEs</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1A1A2E;
-            background: #FFFFFF;
+        :root {
+            --primary-green: #10B981;
+            --primary-orange: #F59E0B;
+            --primary-yellow: #FBBF24;
+            --accent-red: #EF4444;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --white: #FFFFFF;
+            --gradient-1: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --gradient-2: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            --gradient-3: linear-gradient(135deg, #10B981 0%, #F59E0B 100%);
+            --gradient-4: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
         }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
             z-index: 1000;
             padding: 20px 0;
+            border-bottom: 3px solid var(--primary-green);
         }
 
         .nav-container {
@@ -39,110 +59,218 @@
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 800;
-            color: #113170;
+            font-size: 32px;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
         }
 
         .nav-links a {
             margin-left: 30px;
-            color: #1A1A2E;
+            color: var(--dark);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: #FF6B35;
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-3);
+            transition: width 0.3s;
         }
 
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #010e17 0%, #1A6B9E 100%);
+            background: var(--gradient-3);
             color: white;
-            padding: 120px 20px 80px;
+            padding: 140px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(251, 191, 36, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.2) 0%, transparent 50%);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title {
-            font-size: 52px;
-            font-weight: 800;
+            font-size: 64px;
+            font-weight: 900;
             margin-bottom: 24px;
-            line-height: 1.2;
+            line-height: 1.1;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-subtitle {
-            font-size: 20px;
+            font-size: 22px;
             margin-bottom: 48px;
             opacity: 0.95;
+            max-width: 900px;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px;
-            max-width: 700px;
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .stat-number {
             font-size: 56px;
-            font-weight: 800;
-            color: #FF6B35;
+            font-weight: 900;
+            color: var(--primary-yellow);
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .stat-label {
             font-size: 14px;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 500;
         }
 
+        /* Section Styles */
         .section {
-            padding: 80px 20px;
+            padding: 100px 20px;
+            position: relative;
         }
 
         .section-title {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: #0A4B78;
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-align: center;
         }
 
         .section-subtitle {
-            font-size: 18px;
-            color: #6C757D;
+            font-size: 20px;
+            color: #6B7280;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
+            font-weight: 300;
+        }
+
+        .bg-pattern {
+            background: 
+                linear-gradient(90deg, var(--light) 21px, transparent 1%) center,
+                linear-gradient(var(--light) 21px, transparent 1%) center,
+                #E5E7EB;
+            background-size: 22px 22px;
         }
 
         .bg-light {
-            background: #F8F9FA;
+            background: var(--light);
         }
 
-        .problem-grid, .features-grid {
+        /* Problem Grid */
+        .problem-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .card {
             background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 45px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 3px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-3);
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(16, 185, 129, 0.25);
+            border-color: var(--primary-green);
         }
 
         .card h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #0A4B78;
+            font-size: 28px;
+            margin-bottom: 24px;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
 
         .card ul {
@@ -150,133 +278,411 @@
         }
 
         .card li {
-            padding: 8px 0;
-            padding-left: 24px;
+            padding: 12px 0;
+            padding-left: 32px;
             position: relative;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .card li:before {
-            content: '•';
+            content: '●';
             position: absolute;
             left: 0;
-            color: #FF6B35;
+            color: var(--primary-orange);
+            font-size: 20px;
             font-weight: bold;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 35px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(245, 158, 11, 0.3);
+            border-color: var(--primary-orange);
+        }
+
+        .feature-icon {
+            font-size: 52px;
+            margin-bottom: 20px;
+            display: inline-block;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .feature-card.highlight {
+            background: var(--gradient-2);
+            color: white;
+            border-color: var(--primary-yellow);
+        }
+
+        .feature-card.highlight h3 {
+            color: white;
+        }
+
+        .feature-card.highlight li:before {
+            color: var(--primary-yellow);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--gradient-2);
+            color: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            margin: 60px auto;
+            max-width: 1000px;
+            box-shadow: 0 20px 60px rgba(245, 158, 11, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .highlight-box h3 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .highlight-box p {
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        /* Channel & Payment Grids */
+        .channel-grid, .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        .channel-item, .payment-item {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            border: 3px solid var(--primary-green);
+            color: var(--dark);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .channel-item:hover, .payment-item:hover {
+            transform: scale(1.08);
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Benchmark Table */
+        .benchmark-wrapper {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 4px solid var(--primary-green);
         }
 
         .benchmark-table {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
             border-collapse: collapse;
-            background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .benchmark-table th {
-            background: #0A4B78;
+            background: var(--gradient-1);
             color: white;
-            padding: 16px;
+            padding: 20px;
             text-align: left;
             font-weight: 700;
+            font-size: 15px;
+            border-bottom: 4px solid var(--primary-yellow);
         }
 
         .benchmark-table td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #E0E0E0;
+            padding: 18px 20px;
+            border-bottom: 2px solid #E5E7EB;
+            font-size: 14px;
         }
 
-        .benchmark-table tr:nth-child(even) {
-            background: #F8F9FA;
+        .benchmark-table tr:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .category-row {
+            background: var(--gradient-4) !important;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .category-row td {
+            padding: 16px 20px;
+            font-size: 15px;
+            border-bottom: 3px solid var(--primary-orange);
         }
 
         .wassil-col {
-            background: #E8F5E9 !important;
-            font-weight: 600;
+            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%) !important;
+            font-weight: 700;
+            color: #065F46;
+            border-left: 4px solid var(--primary-green);
         }
 
-        .highlight-box {
-            background: #FF6B35;
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 40px auto;
-            max-width: 900px;
-        }
-
-        .highlight-box h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
+        /* Pricing */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .pricing-card {
             background: white;
-            padding: 32px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 45px 35px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
             text-align: center;
+            border: 3px solid #E5E7EB;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(16, 185, 129, 0.3);
+            border-color: var(--primary-green);
         }
 
         .pricing-card.featured {
-            border: 3px solid #FF6B35;
-            transform: scale(1.05);
+            border: 4px solid var(--primary-orange);
+            transform: scale(1.08);
+            background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-15px) scale(1.11);
+        }
+
+        .pricing-badge {
+            background: var(--gradient-2);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            margin: -45px -35px 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            font-weight: 800;
+            color: var(--dark);
         }
 
         .price {
-            font-size: 36px;
-            font-weight: 800;
-            color: #0A4B78;
-            margin: 16px 0;
+            font-size: 48px;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
         }
 
+        .price span {
+            font-size: 18px;
+            font-weight: 400;
+            color: #6B7280;
+        }
+
+        /* Roadmap */
+        .roadmap-timeline {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 50px auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .roadmap-step {
+            flex: 1;
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 3px solid var(--primary-green);
+            transition: all 0.3s;
+        }
+
+        .roadmap-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.3);
+            background: var(--gradient-1);
+            color: white;
+        }
+
+        .roadmap-step h4 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .roadmap-step p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .roadmap-arrow {
+            font-size: 32px;
+            color: var(--primary-orange);
+            font-weight: 900;
+        }
+
+        /* Closing */
         .closing {
-            background: linear-gradient(135deg, #0A4B78 0%, #1A6B9E 100%);
+            background: var(--gradient-3);
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .closing:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(251, 191, 36, 0.2) 0%, transparent 70%),
+                radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .closing h2 {
-            font-size: 42px;
+            font-size: 52px;
             margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+            font-weight: 900;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .closing .highlight-text {
+            color: var(--primary-yellow);
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
         }
 
         .cta-button {
             display: inline-block;
-            background: #FF6B35;
-            color: white;
-            padding: 16px 48px;
-            border-radius: 8px;
+            background: white;
+            color: var(--primary-green);
+            padding: 20px 60px;
+            border-radius: 50px;
             text-decoration: none;
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 32px;
+            font-size: 20px;
+            font-weight: 800;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-button:hover {
-            background: #FF8554;
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            background: var(--primary-yellow);
+            color: var(--dark);
         }
 
+        /* Footer */
         footer {
-            background: #1A1A2E;
+            background: var(--dark);
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
 
+        .footer-logo {
+            font-size: 36px;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h3 {
+            font-size: 28px;
+            color: var(--dark);
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero-title { font-size: 32px; }
+            .hero-title { font-size: 36px; }
             .hero-stats { grid-template-columns: 1fr; }
-            .section-title { font-size: 32px; }
+            .section-title { font-size: 36px; }
             .nav-links { display: none; }
+            .benchmark-table { font-size: 12px; }
+            .benchmark-table th, .benchmark-table td { padding: 12px 8px; }
+            .roadmap-timeline { 
+                flex-direction: column; 
+                gap: 30px;
+            }
+            .roadmap-arrow { display: none; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-card.featured { transform: scale(1); }
         }
     </style>
 </head>
@@ -290,6 +696,7 @@
                 <a href="#solution">Solution</a>
                 <a href="#benchmark">Benchmark</a>
                 <a href="#market">Market</a>
+                <a href="#pricing">Pricing</a>
             </div>
         </div>
     </nav>
@@ -297,40 +704,40 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Commerce Operations for Morocco's Real Business Reality</h1>
-            <p class="hero-subtitle">The first Moroccan SaaS platform that centralizes & manages commerce the way businesses actually operate: through WhatsApp, Instagram, phone calls, and Websites.</p>
+            <h1 class="hero-title">Commerce Operations Platform for Moroccan MSMEs</h1>
+            <p class="hero-subtitle">The first platform that manages commerce the way Moroccan micro-entrepreneurs, solopreneurs, and auto-entrepreneurs actually operate: through WhatsApp, Instagram, email, TikTok, and in-person sales.</p>
             <div class="hero-stats">
-                <div>
+                <div class="stat-box">
                     <div class="stat-number">78%</div>
-                    <div class="stat-label">of orders via social</div>
+                    <div class="stat-label">of orders via social & messaging</div>
                 </div>
-                <div>
+                <div class="stat-box">
                     <div class="stat-number">85%</div>
                     <div class="stat-label">cash on delivery</div>
                 </div>
-                <div>
+                <div class="stat-box">
                     <div class="stat-number">450K+</div>
-                    <div class="stat-label">Moroccan businesses</div>
+                    <div class="stat-label">Moroccan MSMEs</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Problem Section -->
-    <section id="problem" class="section bg-light">
+    <section id="problem" class="section bg-pattern">
         <div class="container">
-            <h2 class="section-title">The Hidden Commerce Chaos</h2>
-            <p class="section-subtitle">Most Moroccan Businesses Don't Sell Through Websites</p>
+            <h2 class="section-title">The Operations Chaos</h2>
+            <p class="section-subtitle">Most Moroccan MSMEs don't operate through websites</p>
             
             <div class="problem-grid">
                 <div class="card">
                     <h3>Current Reality</h3>
                     <ul>
-                        <li>78% of Moroccan commerce happens via WhatsApp & Instagram</li>
-                        <li>Business owners manually juggle multiple channels</li>
+                        <li>78% of commerce happens via WhatsApp, Instagram, email, TikTok, and Telegram</li>
+                        <li>Micro-entrepreneurs manually juggle multiple channels</li>
                         <li>Lost orders, inventory errors, delivery mix-ups</li>
                         <li>COD is 85%+ of transactions</li>
-                        <li>Hours spent on repetitive customer questions</li>
+                        <li>Hours spent on repetitive customer inquiries</li>
                     </ul>
                 </div>
                 <div class="card">
@@ -338,40 +745,125 @@
                     <ul>
                         <li>✅ Unified dashboard for all channels</li>
                         <li>✅ Real-time inventory sync</li>
-                        <li>✅ Automated COD tracking</li>
-                        <li>✅ AI handles repetitive questions</li>
+                        <li>✅ Automated COD tracking & reconciliation</li>
+                        <li>✅ AI handles repetitive inquiries</li>
                         <li>✅ 75% time saved on operations</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="highlight-box" style="background: #0A4B78; margin-top: 40px;">
-                <p style="font-size: 20px; line-height: 1.6;">
-                    <strong>A Day in the Life:</strong> A clothing boutique owner in Casablanca receives 50 orders/day. 
+            <div class="highlight-box">
+                <p style="font-size: 20px; line-height: 1.8;">
+                    <strong>A Day in the Life:</strong> A fashion micro-entrepreneur in Casablanca receives 50 orders/day across WhatsApp, Instagram DMs, and email. 
                     She manually writes each one down, checks inventory by memory, calls delivery companies individually, 
                     and tracks COD payments on paper. <br><br>
-                    <strong style="color: #FF6B35;">This is not a website problem. This is an operations problem.</strong>
+                    <strong style="color: var(--primary-yellow);">This is not a website problem. This is an operations problem.</strong>
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Alternatives Section -->
-    <section class="section">
+    <!-- Solution Section -->
+    <section id="solution" class="section bg-light">
         <div class="container">
-            <h2 class="section-title">Existing Solutions Miss the Mark</h2>
-            <p class="section-subtitle">Built for website-first selling, not Moroccan business reality</p>
+            <h2 class="section-title">The Wassil Solution</h2>
+            <p class="section-subtitle">Operations-first platform built for how Moroccan MSMEs actually work</p>
             
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="card">
-                    <h3>The Mismatch</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Unified Order Dashboard</h3>
                     <ul>
-                        <li>❌ Assume structured online shopping behavior</li>
-                        <li>❌ Don't capture WhatsApp/Instagram/offline orders natively</li>
-                        <li>❌ COD workflows are clunky add-ons</li>
-                        <li>❌ No unified view across 5+ channels</li>
-                        <li>❌ Force businesses to change how they operate</li>
+                        <li>Manually enter orders from any channel</li>
+                        <li>Auto-sync from optional website</li>
+                        <li>All orders centralized with status tracking</li>
                     </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Smart Inventory</h3>
+                    <ul>
+                        <li>Track stock across all channels</li>
+                        <li>Automatic deduction on order placement</li>
+                        <li>Low-stock alerts</li>
+                        <li>Multi-location support</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Moroccan Payment Methods</h3>
+                    <ul>
+                        <li>Cash (COD, agencies, postal)</li>
+                        <li>Card & e-wallets (CMI, mobile wallets)</li>
+                        <li>Wire transfer, debit, cheque</li>
+                        <li>Invoice & crypto support</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Integrated Delivery</h3>
+                    <ul>
+                        <li>Native automation with Amana, CTM, Jumia, Aramex, CashPlus</li>
+                        <li>Bulk shipment creation</li>
+                        <li>Real-time status tracking</li>
+                        <li>Auto-update payment on delivery confirmation</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Optional Website</h3>
+                    <ul>
+                        <li>Simple mobile-first storefront</li>
+                        <li>Auto-syncs with central dashboard</li>
+                        <li>For MSMEs ready to go online</li>
+                    </ul>
+                </div>
+                <div class="feature-card highlight">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Assistance</h3>
+                    <ul>
+                        <li>WhatsApp AI in Moroccan (darija) & French</li>
+                        <li>Instagram AI for DMs</li>
+                        <li>60% workload reduction</li>
+                        <li>Captures orders automatically</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details: Channels & Payments -->
+    <section class="section bg-pattern">
+        <div class="container">
+            <h2 class="section-title">Multi-Channel & Payment Support</h2>
+            
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="section-header">
+                    <h3>Supported Order Channels</h3>
+                </div>
+                <div class="channel-grid">
+                    <div class="channel-item">📱 WhatsApp</div>
+                    <div class="channel-item">📷 Instagram</div>
+                    <div class="channel-item">✉️ Email</div>
+                    <div class="channel-item">🎵 TikTok</div>
+                    <div class="channel-item">💬 Telegram</div>
+                    <div class="channel-item">🏪 Onsite</div>
+                    <div class="channel-item">🌐 Website</div>
+                </div>
+
+                <div class="section-header" style="margin-top: 80px;">
+                    <h3>Payment Methods (Morocco & International)</h3>
+                </div>
+                <div class="payment-grid">
+                    <div class="payment-item">💵 Cash (COD)</div>
+                    <div class="payment-item">💳 Card</div>
+                    <div class="payment-item">📱 E-wallets</div>
+                    <div class="payment-item">🏦 Wire Transfer</div>
+                    <div class="payment-item">💰 Debit</div>
+                    <div class="payment-item">📄 Cheque</div>
+                    <div class="payment-item">📋 Invoice</div>
+                    <div class="payment-item">₿ Crypto</div>
+                    <div class="payment-item">🌍 International</div>
                 </div>
             </div>
         </div>
@@ -380,221 +872,135 @@
     <!-- Benchmark Section -->
     <section id="benchmark" class="section bg-light">
         <div class="container">
-            <h2 class="section-title">Detailed Competitive Benchmark</h2>
+            <h2 class="section-title">Competitive Benchmark</h2>
             <p class="section-subtitle">How Wassil compares to current solutions</p>
             
-            <div style="overflow-x: auto;">
+            <div class="benchmark-wrapper">
                 <table class="benchmark-table">
                     <thead>
                         <tr>
-                            <th style="min-width: 200px;">Feature</th>
-                            <th>Wassil</th>
-                            <th>YouCan</th>
-                            <th>Shopify</th>
+                            <th style="min-width: 220px;">Feature</th>
+                            <th style="min-width: 180px;">Wassil</th>
+                            <th style="min-width: 160px;">YouCan</th>
+                            <th style="min-width: 160px;">Shopify</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">CORE PHILOSOPHY</td>
+                        <tr class="category-row">
+                            <td colspan="4">CORE PHILOSOPHY</td>
                         </tr>
                         <tr>
                             <td><strong>Primary Focus</strong></td>
-                            <td class="wassil-col">Operations-first, multi-channel</td>
-                            <td>Website-first store</td>
-                            <td>Global e-commerce</td>
+                            <td class="wassil-col">Operations-first, multi-channel management</td>
+                            <td>Website-first online store</td>
+                            <td>Global e-commerce platform</td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">ORDER MANAGEMENT</td>
+                            <td><strong>Target User</strong></td>
+                            <td class="wassil-col">MSMEs, solopreneurs, micro-entrepreneurs</td>
+                            <td>Online store owners</td>
+                            <td>Established brands</td>
+                        </tr>
+                        
+                        <tr class="category-row">
+                            <td colspan="4">ORDER MANAGEMENT</td>
                         </tr>
                         <tr>
                             <td><strong>Primary Order Source</strong></td>
-                            <td class="wassil-col">WhatsApp, Instagram, offline, phone, website</td>
+                            <td class="wassil-col">WhatsApp, Instagram, email, TikTok, Telegram, onsite, website</td>
                             <td>Website checkout</td>
                             <td>Website checkout</td>
                         </tr>
                         <tr>
                             <td><strong>Manual Order Entry</strong></td>
                             <td class="wassil-col">Native fast-entry flow</td>
-                            <td>Clunky admin workaround</td>
-                            <td>Clunky admin workaround</td>
+                            <td>Complex manual procedure</td>
+                            <td>Complex manual procedure</td>
                         </tr>
-                        <tr>
-                            <td><strong>Multi-Channel Sync</strong></td>
-                            <td class="wassil-col">Real-time across ALL sources</td>
-                            <td>Website-only</td>
-                            <td>Website-only</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">PAYMENT & COD</td>
+                        
+                        <tr class="category-row">
+                            <td colspan="4">PAYMENT & COD</td>
                         </tr>
                         <tr>
                             <td><strong>COD Workflow</strong></td>
-                            <td class="wassil-col">Native tracking + reconciliation</td>
+                            <td class="wassil-col">Native tracking, reconciliation dashboard</td>
                             <td>Basic COD flag</td>
                             <td>Basic COD flag</td>
                         </tr>
                         <tr>
-                            <td><strong>Morocco Payments</strong></td>
-                            <td class="wassil-col">COD, CMI, mobile wallets (native)</td>
-                            <td>CMI integration</td>
+                            <td><strong>Morocco Payment Methods</strong></td>
+                            <td class="wassil-col">Cash, card, e-wallets, wire, debit, cheque, invoice, crypto (all native)</td>
+                            <td>CMI integration, COD</td>
                             <td>Requires setup</td>
                         </tr>
-                        <tr>
-                            <td><strong>Delivery → Payment Sync</strong></td>
-                            <td class="wassil-col">Auto-updates</td>
-                            <td>Manual</td>
-                            <td>Manual</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">DELIVERY</td>
+                        
+                        <tr class="category-row">
+                            <td colspan="4">DELIVERY & LOGISTICS</td>
                         </tr>
                         <tr>
                             <td><strong>Morocco Logistics</strong></td>
-                            <td class="wassil-col">Amana, CTM, Jumia (direct)</td>
+                            <td class="wassil-col">Native automation: Amana, CTM, Jumia, Aramex, CashPlus</td>
                             <td>Limited</td>
-                            <td>None (Morocco)</td>
+                            <td>No Morocco integrations</td>
+                        </tr>
+                        
+                        <tr class="category-row">
+                            <td colspan="4">AI & AUTOMATION</td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">AI & AUTOMATION</td>
-                        </tr>
-                        <tr>
-                            <td><strong>WhatsApp AI Agent</strong></td>
-                            <td class="wassil-col">Darija/French</td>
-                            <td>None</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Instagram AI Agent</strong></td>
-                            <td class="wassil-col">Yes</td>
-                            <td>None</td>
-                            <td>None</td>
+                            <td><strong>WhatsApp AI</strong></td>
+                            <td class="wassil-col">Moroccan (darija) & French (Arabic & Latin script)</td>
+                            <td>–</td>
+                            <td>–</td>
                         </tr>
                         <tr>
                             <td><strong>Time Saved</strong></td>
                             <td class="wassil-col">75% reduction</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
+                            <td>–</td>
+                            <td>–</td>
+                        </tr>
+                        
+                        <tr class="category-row">
+                            <td colspan="4">PRICING</td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="background: #E0E0E0; font-weight: bold;">USER EXPERIENCE</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Setup Time</strong></td>
-                            <td class="wassil-col">10 minutes</td>
-                            <td>1-2 hours</td>
-                            <td>2-4 hours</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Technical Skill</strong></td>
-                            <td class="wassil-col">None required</td>
-                            <td>Low</td>
-                            <td>Low-Medium</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Language Support</strong></td>
-                            <td class="wassil-col">Darija, French, English</td>
-                            <td>French, English</td>
-                            <td>20+ (not Darija)</td>
+                            <td><strong>Entry Price (Gross B2B)</strong></td>
+                            <td class="wassil-col">Free tier (25 orders/month)</td>
+                            <td>~400–800 MAD/month</td>
+                            <td>~400–1,200 MAD/month</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div class="highlight-box" style="margin-top: 40px;">
+            <div class="highlight-box" style="margin-top: 60px;">
                 <h3>Key Insight</h3>
-                <p style="font-size: 18px;">YouCan and Shopify optimize for <strong>selling through websites</strong>. Wassil optimizes for <strong>managing commerce operations</strong> regardless of where the sale happens.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section id="solution" class="section">
-        <div class="container">
-            <h2 class="section-title">Introducing Wassil</h2>
-            <p class="section-subtitle">The commerce operations platform built for how Moroccan businesses actually work</p>
-            
-            <div class="features-grid">
-                <div class="card">
-                    <h3>📋 Unified Order Dashboard</h3>
-                    <ul>
-                        <li>Manually enter orders from any channel</li>
-                        <li>Auto-sync from optional website</li>
-                        <li>All orders in one place</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>📦 Smart Inventory</h3>
-                    <ul>
-                        <li>Track stock across all channels</li>
-                        <li>Automatic deduction</li>
-                        <li>Low-stock alerts</li>
-                        <li>Multi-location support</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>💰 Moroccan Payments</h3>
-                    <ul>
-                        <li>COD tracking native</li>
-                        <li>Collection confirmation</li>
-                        <li>CMI, bank transfers</li>
-                        <li>Cash flow visibility</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>🚚 Integrated Delivery</h3>
-                    <ul>
-                        <li>Amana, CTM, Jumia direct</li>
-                        <li>Bulk shipment creation</li>
-                        <li>Status tracking</li>
-                        <li>Auto-update payments</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>🌐 Optional Website</h3>
-                    <ul>
-                        <li>Simple mobile-first store</li>
-                        <li>Auto-syncs with dashboard</li>
-                        <li>For businesses ready online</li>
-                    </ul>
-                </div>
-                <div class="card" style="background: linear-gradient(135deg, #FFE8D9 0%, #FFF3E0 100%); border: 2px solid #FF6B35;">
-                    <h3>🤖 AI Assistance</h3>
-                    <ul>
-                        <li>WhatsApp AI in Darija/French</li>
-                        <li>Instagram AI for DMs</li>
-                        <li>60% workload reduction</li>
-                        <li>Captures orders automatically</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="highlight-box" style="background: #0A4B78; margin-top: 60px;">
-                <p style="font-size: 20px;"><strong>Core Philosophy:</strong> Wassil doesn't force businesses to change how they operate. It adapts to them.</p>
+                <p style="font-size: 20px;">YouCan and Shopify optimize for <strong>selling through websites</strong>. Wassil optimizes for <strong>managing commerce operations</strong> regardless of where the sale happens.</p>
             </div>
         </div>
     </section>
 
     <!-- Why Wassil Wins -->
-    <section class="section bg-light">
+    <section class="section bg-pattern">
         <div class="container">
             <h2 class="section-title">Why Wassil Wins</h2>
             
             <div class="features-grid">
                 <div class="card">
                     <h3>1. Morocco-First</h3>
-                    <p>Built around Moroccan payment methods, logistics partners, and business behavior. Not a translation of a Western platform.</p>
+                    <p>Built around Moroccan payment methods, logistics partners, and MSME behavior. Not a translation of a Western platform.</p>
                 </div>
                 <div class="card">
                     <h3>2. Operations-Centric</h3>
-                    <p>The dashboard is the product; the website is optional. Business owners get value on day one.</p>
+                    <p>The dashboard is the product; the website is optional. MSMEs get value on day one.</p>
                 </div>
                 <div class="card">
                     <h3>3. Multi-Channel Native</h3>
-                    <p>WhatsApp, Instagram, offline orders are first-class citizens, not afterthoughts.</p>
+                    <p>WhatsApp, Instagram, email, TikTok, Telegram, and onsite orders are first-class citizens.</p>
                 </div>
                 <div class="card">
-                    <h3>4. AI in Darija</h3>
-                    <p>AI agents trained on Moroccan Arabic/French interactions. Understands local phrasing and negotiation.</p>
+                    <h3>4. AI in Moroccan (darija)</h3>
+                    <p>AI agents trained on Moroccan (darija) & French. Supports Arabic & Latin script.</p>
                 </div>
                 <div class="card">
                     <h3>5. Non-Technical</h3>
@@ -605,95 +1011,133 @@
     </section>
 
     <!-- Market -->
-    <section id="market" class="section">
+    <section id="market" class="section bg-light">
         <div class="container">
             <h2 class="section-title">Market Opportunity</h2>
             <p class="section-subtitle">Morocco first, scalable regionally</p>
             
-            <div class="hero-stats" style="max-width: 900px; margin: 0 auto 60px;">
-                <div style="text-align: center;">
-                    <div class="stat-number" style="color: #0A4B78;">450K+</div>
-                    <div class="stat-label" style="color: #6C757D;">Active small businesses</div>
+            <div class="hero-stats" style="max-width: 1000px; margin: 0 auto 70px;">
+                <div class="stat-box" style="background: white; border: 3px solid var(--primary-green);">
+                    <div class="stat-number" style="color: var(--primary-green); text-shadow: none;">450K+</div>
+                    <div class="stat-label" style="color: #6B7280;">Active MSMEs in Morocco</div>
                 </div>
-                <div style="text-align: center;">
-                    <div class="stat-number" style="color: #0A4B78;">85%</div>
-                    <div class="stat-label" style="color: #6C757D;">E-commerce via social & COD</div>
+                <div class="stat-box" style="background: white; border: 3px solid var(--primary-orange);">
+                    <div class="stat-number" style="color: var(--primary-orange); text-shadow: none;">85%</div>
+                    <div class="stat-label" style="color: #6B7280;">E-commerce via social & COD</div>
                 </div>
-                <div style="text-align: center;">
-                    <div class="stat-number" style="color: #0A4B78;">50K</div>
-                    <div class="stat-label" style="color: #6C757D;">Initial addressable market</div>
+                <div class="stat-box" style="background: white; border: 3px solid var(--primary-yellow);">
+                    <div class="stat-number" style="color: var(--primary-yellow); text-shadow: none;">50K</div>
+                    <div class="stat-label" style="color: #6B7280;">Initial addressable market</div>
                 </div>
             </div>
 
-            <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <div class="card" style="max-width: 900px; margin: 0 auto 60px;">
                 <h3>Target Segments (Phase 1)</h3>
-                <p style="margin: 20px 0;">👗 Fashion & Accessories • 💄 Cosmetics & Beauty • 📱 Electronics Resellers • 🍰 Food & Delivery • 🏠 Home Goods</p>
-                
-                <h3 style="margin-top: 30px;">Expansion Potential</h3>
+                <p style="margin: 20px 0; font-size: 16px;">👗 Fashion & Accessories • 💄 Cosmetics & Beauty • 📱 Electronics • 🍰 Food & Delivery • 🏠 Home Goods</p>
+                <p style="margin: 20px 0; font-size: 15px; color: #6B7280;">Focus: Solopreneurs, micro-entrepreneurs, auto-entrepreneurs, side businesses</p>
+
+                <h3 style="margin-top: 40px;">Expansion Potential</h3>
                 <ul>
-                    <li><strong>Morocco:</strong> Year 1 – Foundation & proof of concept</li>
-                    <li><strong>North Africa:</strong> Tunisia, Algeria, Egypt – Similar commerce behaviors</li>
-                    <li><strong>West Africa:</strong> Francophone markets with comparable infrastructure</li>
-                    <li><strong>Emerging Markets:</strong> Global markets with similar pain points</li>
+                    <li><strong>Morocco:</strong> Year 1 – POC → MVP → Beta → Final</li>
+                    <li><strong>North Africa:</strong> Tunisia, Algeria, Egypt, Libya</li>
+                    <li><strong>West Africa:</strong> Francophone markets</li>
+                    <li><strong>Emerging Markets:</strong> Global expansion</li>
                 </ul>
+            </div>
+
+            <div class="section-header">
+                <h3>Year 1 Roadmap</h3>
+            </div>
+            <div class="roadmap-timeline">
+                <div class="roadmap-step">
+                    <h4>POC</h4>
+                    <p>Proof of Concept</p>
+                </div>
+                <div class="roadmap-arrow">→</div>
+                <div class="roadmap-step">
+                    <h4>MVP</h4>
+                    <p>Minimum Viable Product</p>
+                </div>
+                <div class="roadmap-arrow">→</div>
+                <div class="roadmap-step">
+                    <h4>Beta</h4>
+                    <p>Beta Testing</p>
+                </div>
+                <div class="roadmap-arrow">→</div>
+                <div class="roadmap-step">
+                    <h4>Final</h4>
+                    <p>Production Launch</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Business Model -->
-    <section class="section bg-light">
+    <!-- Pricing -->
+    <section id="pricing" class="section bg-pattern">
         <div class="container">
-            <h2 class="section-title">Sustainable SaaS Revenue</h2>
+            <h2 class="section-title">Transparent SaaS Pricing</h2>
+            <p class="section-subtitle">Gross B2B pricing in MAD</p>
             
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Free</h3>
-                    <div class="price">MAD 0<span style="font-size: 16px;">/mo</span></div>
-                    <ul style="text-align: left; margin-top: 20px;">
-                        <li>25 orders/month</li>
-                        <li>Basic inventory</li>
+                    <div class="price">0 MAD<span>/mo</span></div>
+                    <ul style="text-align: left; margin-top: 24px;">
+                        <li>Up to 25 orders/month</li>
+                        <li>Basic inventory tracking</li>
+                        <li>Manual order entry only</li>
                         <li>1 user</li>
                     </ul>
+                    <p style="margin-top: 24px; font-size: 13px; color: #6B7280;">For testing & very small operations</p>
                 </div>
+                
                 <div class="pricing-card featured">
-                    <div style="background: #FF6B35; color: white; padding: 8px; margin: -32px -32px 20px; border-radius: 12px 12px 0 0;">Most Popular</div>
-                    <h3>Starter</h3>
-                    <div class="price">MAD 199<span style="font-size: 16px;">/mo</span></div>
-                    <ul style="text-align: left; margin-top: 20px;">
-                        <li>200 orders/month</li>
-                        <li>Full inventory</li>
-                        <li>Website builder</li>
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Basic</h3>
+                    <div class="price">199 MAD<span>/mo</span></div>
+                    <ul style="text-align: left; margin-top: 24px;">
+                        <li>Up to 200 orders/month</li>
+                        <li>Full inventory management</li>
+                        <li>Website builder included</li>
                         <li>WhatsApp AI (limited)</li>
                         <li>2 users</li>
                     </ul>
+                    <p style="margin-top: 24px; font-size: 13px; color: #6B7280;">For solopreneurs & micro-entrepreneurs</p>
                 </div>
+                
                 <div class="pricing-card">
-                    <h3>Professional</h3>
-                    <div class="price">MAD 499<span style="font-size: 16px;">/mo</span></div>
-                    <ul style="text-align: left; margin-top: 20px;">
+                    <h3>Advanced</h3>
+                    <div class="price">499 MAD<span>/mo</span></div>
+                    <ul style="text-align: left; margin-top: 24px;">
                         <li>Unlimited orders</li>
                         <li>Advanced analytics</li>
                         <li>Full AI agents</li>
-                        <li>Multi-location</li>
+                        <li>Multi-location inventory</li>
+                        <li>Delivery integrations</li>
                         <li>5 users</li>
                     </ul>
+                    <p style="margin-top: 24px; font-size: 13px; color: #6B7280;">For growing MSMEs</p>
                 </div>
+                
                 <div class="pricing-card">
-                    <h3>Enterprise</h3>
+                    <h3>Custom</h3>
                     <div class="price">Custom</div>
-                    <ul style="text-align: left; margin-top: 20px;">
+                    <ul style="text-align: left; margin-top: 24px;">
                         <li>Dedicated support</li>
                         <li>Custom integrations</li>
                         <li>API access</li>
                         <li>White-label options</li>
+                        <li>Unlimited users</li>
+                        <li>Enterprise SLA</li>
                     </ul>
+                    <p style="margin-top: 24px; font-size: 13px; color: #6B7280;">For brands & larger operations</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Why Now -->
-    <section class="section">
+    <section class="section bg-light">
         <div class="container">
             <h2 class="section-title">Why Now</h2>
             <p class="section-subtitle">The perfect storm for Wassil</p>
@@ -701,28 +1145,28 @@
             <div class="features-grid">
                 <div class="card">
                     <h3>📱 Digital Acceleration</h3>
-                    <p>Post-COVID: WhatsApp/Instagram commerce exploded, but infrastructure didn't catch up</p>
+                    <p>Post-COVID: WhatsApp/Instagram/TikTok commerce exploded, but MSME infrastructure didn't catch up</p>
                 </div>
                 <div class="card">
                     <h3>💬 Social Commerce</h3>
-                    <p>Customers comfortable buying via DMs, businesses stuck with wrong tools</p>
+                    <p>Customers comfortable buying via messaging apps. MSMEs stuck with wrong tools.</p>
                 </div>
                 <div class="card">
                     <h3>🚚 Delivery Infrastructure</h3>
-                    <p>Amana, Jumia Logistics, CTM expanding—integration opportunities now available</p>
+                    <p>Amana, Jumia, CTM, Aramex, CashPlus expanding—integration opportunities available</p>
                 </div>
                 <div class="card">
                     <h3>📲 Mobile-First Morocco</h3>
-                    <p>25M+ smartphone users, 80%+ mobile internet penetration</p>
+                    <p>25M+ smartphone users, 80%+ mobile internet. MSMEs operate from phones.</p>
                 </div>
                 <div class="card">
-                    <h3>🚀 Startup Ecosystem</h3>
-                    <p>Investors interested, success stories proving market viability, talent pool growing</p>
+                    <h3>🚀 MSME Ecosystem</h3>
+                    <p>Investors interested, auto-entrepreneur programs expanding, proven market viability</p>
                 </div>
             </div>
 
-            <div class="highlight-box" style="margin-top: 60px;">
-                <p style="font-size: 20px;"><strong>The Window:</strong> Businesses are ready, infrastructure exists, but no one has built the right product yet. <strong>Wassil is that product.</strong></p>
+            <div class="highlight-box" style="margin-top: 70px;">
+                <p style="font-size: 22px;"><strong>The Window:</strong> MSMEs are ready, infrastructure exists, but no one has built the right product yet. <strong>Wassil is that product.</strong></p>
             </div>
         </div>
     </section>
@@ -730,14 +1174,14 @@
     <!-- Closing -->
     <section class="closing">
         <div class="container">
-            <h2>We don't just help businesses sell online.</h2>
-            <h2 style="color: #FF6B35;">We help them run better.</h2>
+            <h2>We don't just help MSMEs sell online.</h2>
+            <h2 class="highlight-text">We help them sell better with less friction, less effort, and less time.</h2>
             
-            <p style="font-size: 22px; font-style: italic; margin: 40px auto; max-width: 800px;">
-                "Most platforms ask Moroccan businesses to change. <strong>Wassil changes to fit Moroccan businesses.</strong>"
+            <p style="font-size: 24px; font-style: italic; margin: 50px auto; max-width: 900px; position: relative; z-index: 1;">
+                "Most platforms ask Moroccan MSMEs to change. <strong>Wassil changes to fit Moroccan MSMEs.</strong>"
             </p>
 
-            <h3 style="font-size: 32px; margin-top: 60px;">Let's Build the Future of Moroccan Commerce</h3>
+            <h3 style="font-size: 36px; margin-top: 60px; position: relative; z-index: 1; font-weight: 800;">Let's Build the Future of Moroccan Commerce</h3>
             <a href="mailto:contact@wassil.ma" class="cta-button">Get in Touch</a>
         </div>
     </section>
@@ -745,11 +1189,10 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px; color: #FF6B35;">WASSIL</div>
-            <p>Commerce operations for Morocco's real business reality</p>
-            <p style="margin-top: 16px;"><a href="mailto:amirabahanni@gmail.com" style="color: white; text-decoration: none;">amirabahanni@gmail.com</a></p>
+            <div class="footer-logo">WASSIL</div>
+            <p style="font-size: 16px;">Commerce operations platform for Moroccan MSMEs</p>
+            <p style="margin-top: 24px; font-size: 14px; opacity: 0.8;">© 2026 Wassil. Built for Morocco, scalable globally.</p>
         </div>
     </footer>
 </body>
-
 </html>
